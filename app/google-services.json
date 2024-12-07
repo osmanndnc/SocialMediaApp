@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "827676645597",
+    "project_id": "kotlinsocialmediaclone",
+    "storage_bucket": "kotlinsocialmediaclone.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827676645597:android:8394e3db44595b5415e334",
+        "android_client_info": {
+          "package_name": "com.osmanndinc.socialmediaclone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUy71n3f_m-R4KXnKyReL75ej2IY2rFNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
