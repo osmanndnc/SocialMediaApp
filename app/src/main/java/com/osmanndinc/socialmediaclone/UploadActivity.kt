@@ -22,6 +22,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -67,6 +68,25 @@ class UploadActivity : AppCompatActivity() {
         val imagereferance = referance.child("images").child(imagenumber)
         if (selectedPicture != null){
             imagereferance.putFile(selectedPicture!!).addOnSuccessListener {
+                val uploadPictureReferance = storage.reference.child("images").child(imagenumber)
+                uploadPictureReferance.downloadUrl.addOnSuccessListener {
+                    val dowlandUrl = it.toString()
+                    if (auth.currentUser != null){
+                        val postMap = hashMapOf<String, Any>()
+                        postMap.put("dowlandUrl",dowlandUrl)
+                        postMap.put("userEmail",auth.currentUser!!.email!!)
+                        postMap.put("comment", binding.commandText.text.toString())
+                        postMap.put("date", Timestamp.now())
+
+                        firestore.collection("Posts").add(postMap).addOnSuccessListener {
+                            finish()
+
+                        }.addOnFailureListener{
+                            Toast.makeText(this@UploadActivity,it.localizedMessage,Toast.LENGTH_LONG).show()
+                        }
+
+                    }
+                }
 
             }.addOnFailureListener{
                     Toast.makeText(this,it.localizedMessage,Toast.LENGTH_LONG).show()
